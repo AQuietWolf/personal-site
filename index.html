@@ -13,11 +13,11 @@
     <!-- this is Navbar -->
     <div class="navbar">
         <div class="nav-logo col-2">
-            <img src="wolf.png" alt="" title="Hello motherfucker">
+            <img src="wolf.png" alt="" title="Hello">
         </div>
 
         <div class="nav-heading col-4">
-            <h1>tHeQuiEtWoLf</h1>
+            <h1>Alok Mondol</h1>
         </div>
 
         <div class="navbar-menu col-6">
@@ -37,8 +37,8 @@
             <img src="snow.png" alt="">
         </div>
         <div class="des">
-            <h1>Hello this is me,,the biggest loser in this world <br> & <br> the world will be a better place after my death</h1>
-            <p>i like myself i hate myself i like myself i hate myself i like myself i hate myself i like myself i hate myself i like myself i hate myself i like myself i hate myself i like myself i hate myself i like myself i hate myself i like myself i hate myself i like myself i hate myself i like myself i hate myself i like myself i hate myself i like myself i hate myself</p>
+            <h1>Hello this is Alok,,welcome to my portfolio <br> & <br> its not much i know but</h1>
+            <p>i hope you won't hate it</p>
         </div>
         <div class="bottom-image">
             <img src="snow.png" alt="">
@@ -53,11 +53,11 @@
         <h2>About me</h2>
         <hr class="dotted-hr">
         <div class="about-me-image col-6">
-            <img src="stark sigil.jpg" alt="" title="Teri maa ki chud">
+            <img src="stark sigil.jpg" alt="" title="hi if you are here">
         </div>
         <div class="aboutme-desc col-6">
-            <p>When the snows fall and the white winds blow, the lone wolf dies, but the pack survives.</p>
-            <p>When the snows fall and the white winds blow, the lone wolf dies, but the pack survives.</p>
+            <p>hello i am alok,,i am currently a student of CSE in Rajshahi University of Engineering & Technology</p>
+            <p>i know a little bit web development(mostly front end :HTML,CSS,BOOTSRAP,JAVASCRIPT),,i do little bit of competitive programming,,im good at it, not great</p>
             <hr class="aboutme-hr">
             <p>Name: Alok</p>
             <hr class="aboutme-hr">
@@ -72,9 +72,7 @@
 
             <p>
 
-                <a href="https://awoiaf.westeros.org/index.php/Main_Page" target="blank">
-                    <button class="cv-button">Download CV</button>
-                </a>
+                    <button class="cv-button" onclick="downloadPDF()">Download CV</button>
 
             </p>
         </div>
@@ -214,5 +212,33 @@
         </div>
       </div>
      <!-- footer ends here -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+    function downloadPDF() {
+        const { jsPDF } = window.jspdf;
+
+        // Capture the whole page
+        html2canvas(document.body, {
+            scale: 2,  // Higher scale = better quality
+            useCORS: true // Allows external images to be captured
+        }).then(canvas => {
+            let imgData = canvas.toDataURL("image/png"); // Convert canvas to image
+            let pdf = new jsPDF("p", "mm", "a4");
+
+            // Convert canvas to PDF format
+            let imgWidth = 210; // A4 width in mm
+            let pageHeight = 297; // A4 height in mm
+            let imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+            pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+
+            // Save the PDF file
+            pdf.save("Portfolio.pdf");
+        });
+        }
+    </script>
+
 </body>
 </html>
