@@ -37,8 +37,7 @@
             <img src="snow.png" alt="">
         </div>
         <div class="des">
-            <h1>Hello this is Alok,,welcome to my portfolio <br> & <br> its not much i know but</h1>
-            <p>i hope you won't hate it</p>
+            <h1>Hello this is Alok,,welcome to my portfolio <br> & <br> its not much i know but i hope you won't hate it</h1>
         </div>
         <div class="bottom-image">
             <img src="snow.png" alt="">
@@ -169,10 +168,9 @@
             <div class="achievement col-4">
                 <h2>Achievement</h2>
                 <hr class="dotted-hr">
-                <p>1. Fact on bore chamber into the i i ashore, some.</p>
-                <p>2. Decorum for above there flown tis and straight that the,.</p>
-                <p>3. One ominous or only guessing a. For sat lining flirt.</p>
-                <p>4. Name i explore tis gloated had and wore. Let lenore.</p>
+                <p>1. 7th place in Ganjam Intra Ruet Programming Contest 2024</p>
+                <p>2. Specialist or Cyan coder in Codeforces (id:theQuietWolf)</p>
+                <p>3. solved >2000 problems on Codeforces</p>
             </div>
             <div class="contact col-4" id="contact-id">
                 <h2>CONTACT ME</h2>
@@ -214,31 +212,42 @@
      <!-- footer ends here -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
     function downloadPDF() {
         const { jsPDF } = window.jspdf;
 
-        // Capture the whole page
         html2canvas(document.body, {
-            scale: 2,  // Higher scale = better quality
-            useCORS: true // Allows external images to be captured
+            scale: 2,
+            useCORS: true
         }).then(canvas => {
-            let imgData = canvas.toDataURL("image/png"); // Convert canvas to image
+            let imgData = canvas.toDataURL("image/png");
             let pdf = new jsPDF("p", "mm", "a4");
 
-            // Convert canvas to PDF format
             let imgWidth = 210; // A4 width in mm
             let pageHeight = 297; // A4 height in mm
             let imgHeight = (canvas.height * imgWidth) / canvas.width;
+            let heightLeft = imgHeight;
+            let position = 0;
 
-            pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+            // Add first page
+            pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
 
-            // Save the PDF file
+            // Add extra pages if needed
+            while (heightLeft > 0) {
+                position -= pageHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+
             pdf.save("Portfolio.pdf");
         });
-        }
-    </script>
+    }
+</script>
+
 
 </body>
 </html>
